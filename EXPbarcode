@@ -1,0 +1,25 @@
+    public float FillSpeed = 30f;
+    public Text EXPbar;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (float.TryParse(EXPbar.text, out float baramount))
+        {
+            bar(baramount);
+            Debug.Log("Slider Value:" + slider.value);
+        }
+        else
+        {
+            Debug.Log("'" + EXPbar.text + "' is not a valid number");
+            bar(0);
+        }
+    }
+    private void bar(float amount)
+    {
+        if(slider.value!=amount)
+            slider.value += amount / FillSpeed * Time.deltaTime;
+        if ((amount > slider.maxValue) && (slider.value == slider.maxValue))
+            slider.value = 0;
+    }
+}
